@@ -33,7 +33,7 @@ class CalculatorModel {
 	TYPE_LEXEME type;
   } Operation;
  private:
-  const double x = 0;
+  double x_ = 0;
   const std::vector<Operation> ARRAY_OPERATIONS_ = {
 	  {"+", 1, ARITHMETIC}, {"-", 1, ARITHMETIC}, {"x", 0, VALUE}, {"/", 2, ARITHMETIC},
 	  {"*", 2, ARITHMETIC}, {"^", 3, ARITHMETIC}, {"mod", 3, ARITHMETIC}, {"(", 10, BRACKET},
@@ -48,9 +48,11 @@ class CalculatorModel {
   int trigonometric(double a, std::string name_operation, double &result);
   int pair_operation(std::stack<double> &value, std::stack<Operation> &operation);
   int solo_operation(std::stack<double> &value, std::stack<Operation> &operation);
- public:
   int parser_string_to_expression(std::string expr, std::vector<Operation> &operation);
   int calculate_expression(std::string src, double &result);
+  double round(double d);
+ public:
+  int calculate(std::string src, double &resul, double x);
 };
 
 #endif //CPP3_SMARTCALC_V2_0_1_SRC_MODEL_CALCULATORMODEL_H_
