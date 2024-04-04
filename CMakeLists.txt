@@ -11,4 +11,7 @@ add_executable(
         src/Model/CalculatorModel.h
         src/Model/CalculatorModel.cpp
         src/UnitTest/calculator_test.cpp
+        src/Controller/controller.h
+        src/Controller/controller.cpp
+        src/Model/Dictionary.h
 )

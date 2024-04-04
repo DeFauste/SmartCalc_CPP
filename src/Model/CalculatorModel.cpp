@@ -1,25 +1,20 @@
-//
-// Created by topha on 26.03.2024.
-//
-
 #include "CalculatorModel.h"
 
 #include <utility>
 
-//поменять хард строки на константы или enum
 int CalculatorModel::arithmetic(double a, double b, std::string name_operation, double &result) {
   int ret = OK;
-  if ("+" == name_operation) {
+  if (LEXEMA_PLUS == name_operation) {
     result = a + b;
-  } else if ("-" == name_operation) {
+  } else if (LEXEMA_MINUS == name_operation) {
     result = a - b;
-  } else if ("*" == name_operation) {
+  } else if (LEXEMA_MUL == name_operation) {
     result = a * b;
-  } else if ("^" == name_operation) {
+  } else if (LEXEMA_POW == name_operation) {
     result = pow(a, b);
-  } else if ("mod" == name_operation) {
+  } else if (LEXEMA_MOD == name_operation) {
     result = fmod(a, b);
-  } else if ("/" == name_operation) {
+  } else if (LEXEMA_DIV == name_operation) {
     if (b != 0)
       result = a / b;
     else
@@ -29,23 +24,23 @@ int CalculatorModel::arithmetic(double a, double b, std::string name_operation, 
 }
 int CalculatorModel::trigonometric(double a, std::string name_operation, double &result) {
   int ret = OK;
-  if ("sin" == name_operation) {
+  if (LEXEMA_SIN == name_operation) {
     result = sin(a);
-  } else if ("cos" == name_operation) {
+  } else if (LEXEMA_COS == name_operation) {
     result = cos(a);
-  } else if ("tan" == name_operation) {
+  } else if (LEXEMA_TAN == name_operation) {
     result = tan(a);
-  } else if ("asin" == name_operation) {
+  } else if (LEXEMA_ASIN== name_operation) {
     result = asin(a);
-  } else if ("acos" == name_operation) {
+  } else if (LEXEMA_ACOS == name_operation) {
     result = acos(a);
-  } else if ("atan" == name_operation) {
+  } else if (LEXEMA_ATAN== name_operation) {
     result = atan(a);
-  } else if ("ln" == name_operation) {
+  } else if (LEXEMA_LN== name_operation) {
     result = log(a);
-  } else if ("log" == name_operation) {
+  } else if (LEXEMA_LOG == name_operation) {
     result = log10(a);
-  } else if ("sqrt" == name_operation) {
+  } else if (LEXEMA_SQRT == name_operation) {
     result = sqrt(a);
   }
   if (std::isnan(result) || std::isinf(result)) {
@@ -126,9 +121,9 @@ int CalculatorModel::calculate_expression(std::string src, double &result) {
       }
     }
 
-    if (item.name == ")") {
+    if (item.name == LEXEMA_R_BRACK) {
       while (!operation.empty()) {
-        if (operation.top().name == "(") {
+        if (operation.top().name == LEXEMA_L_BRACK) {
           operation.pop();
           break;
         }
@@ -142,7 +137,7 @@ int CalculatorModel::calculate_expression(std::string src, double &result) {
     }
 
     if (item.type == VALUE) {
-      if (item.name == "x") {
+      if (item.name == LEXEMA_X) {
         value.push(x_);
       } else {
         value.push(std::stod(item.name));
