@@ -14,4 +14,6 @@ add_executable(
         src/Controller/controller.h
         src/Controller/controller.cpp
         src/Model/Dictionary.h
+        src/Model/BankCalculator.h
+        src/Model/BankCalculator.cpp
 )
